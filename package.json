@@ -1,0 +1,26 @@
+{
+    "name": "ssi-sdk-wasm",
+    "version": "1.0.20",
+    "description": "All things self sovereign identity",
+    "main": "dist/node.js",
+    "module": "dist/browser.js",
+    "browser": "dist/browser.js",
+    "scripts": {
+        "build": "esbuild index.js --bundle --format=cjs --platform=node --outfile=dist/index.js && npm run build:wasm && cp dist/main.wasm examples/react/public/",
+        "build:wasm": "cd wasm && GOOS=js GOARCH=wasm go build -tags jwx_es256k -o ../dist/main.wasm && cd .. && echo \"\\033[0;32mcompiled wasm successfully!\\033[0m\"",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.4",
+        "@babel/preset-env": "^7.21.4",
+        "babel-jest": "^29.5.0",
+        "esbuild": "^0.17.14",
+        "jest": "^29.5.0"
+    },
+    "dependencies": {
+        "fs": "^0.0.1-security",
+        "isomorphic-fetch": "^3.0.0",
+        "jose": "^4.14.4",
+        "path": "^0.12.7"
+    }
+}
